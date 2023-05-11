@@ -7,20 +7,19 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { AuthRoutingModule } from './auth-routing.module';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    LoginComponent
-  ],
+  declarations: [LoginComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
     NzIconModule,
-    NzCheckboxModule
-  ]
+    NzCheckboxModule,
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}
