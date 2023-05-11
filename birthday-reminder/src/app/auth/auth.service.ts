@@ -61,7 +61,7 @@ export class AuthService {
   refreshToken() {
     const refreshToken = localStorage.getItem('refresh_token');
     return this.http
-      .post<{ access: string }>(`${this.baseUrl}/users/refresh`, {
+      .post<{ access: string }>(`${this.baseUrl}/users/login/refresh/`, {
         refreshToken,
       })
       .pipe(
