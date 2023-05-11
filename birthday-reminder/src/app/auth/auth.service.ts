@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { catchError, tap } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -28,10 +29,39 @@ export class AuthService {
       );
   }
 
+  register(
+    email: string,
+    first_name: string,
+    last_name: string,
+    password1: string,
+    password2: string
+  ) {
+    return this.http
+      .post<{ access: string; refresh: string }>(
+        `${this.baseUrl}/users/register/`,
+        {
+          email,
+          first_name,
+          last_name,
+          password1,
+          password2,
+        }
+      )
+      .pipe(
+        tap((res) => {
+          console.log(res);
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.error('Error:', error);
+          return throwError(error);
+        })
+      );
+  }
+
   refreshToken() {
     const refreshToken = localStorage.getItem('refresh_token');
     return this.http
-      .post<{ access: string }>(`${this.baseUrl}/users/efresh`, {
+      .post<{ access: string }>(`${this.baseUrl}/users/refresh`, {
         refreshToken,
       })
       .pipe(
