@@ -3,27 +3,42 @@ import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl: string = 'http://16.16.127.251:8000/api'
+  private baseUrl: string = 'http://16.16.127.251:8000/api';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(email: string, password: string, rememberMe: boolean) {
-    return this.http.post<{accessToken: string, refreshToken: string}>(`${this.baseUrl}/users/login/`, {email, password})
-      .pipe(tap(res => {
-        this.storeAccessToken(res.accessToken, rememberMe);
-        this.storeRefreshToken(res.refreshToken, rememberMe);
-      }));
+    return this.http
+      .post<{ access: string; refresh: string }>(
+        `${this.baseUrl}/users/login/`,
+        {
+          email,
+          password,
+        }
+      )
+      .pipe(
+        tap((res) => {
+          console.log(res.access);
+          this.storeAccessToken(res.access, rememberMe);
+          this.storeRefreshToken(res.refresh, rememberMe);
+        })
+      );
   }
 
   refreshToken() {
     const refreshToken = localStorage.getItem('refresh_token');
-    return this.http.post<{accessToken: string}>(`${this.baseUrl}/users/efresh`, {refreshToken})
-      .pipe(tap(res => {
-        localStorage.setItem('access_token', res.accessToken);
-      }));
+    return this.http
+      .post<{ access: string }>(`${this.baseUrl}/users/efresh`, {
+        refreshToken,
+      })
+      .pipe(
+        tap((res) => {
+          localStorage.setItem('access_token', res.access);
+        })
+      );
   }
 
   handleError401(err: any) {
@@ -49,11 +64,17 @@ export class AuthService {
   }
 
   getAccessToken() {
-    return localStorage.getItem('access_token') || sessionStorage.getItem('access_token');
+    return (
+      localStorage.getItem('access_token') ||
+      sessionStorage.getItem('access_token')
+    );
   }
-  
+
   getRefreshToken() {
-    return localStorage.getItem('refresh_token') || sessionStorage.getItem('refresh_token');
+    return (
+      localStorage.getItem('refresh_token') ||
+      sessionStorage.getItem('refresh_token')
+    );
   }
 
   logout() {

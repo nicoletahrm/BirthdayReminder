@@ -1,15 +1,32 @@
-<form nz-form class="login-form">
+<div class="login-container">
+  <form
+    nz-form
+    [nzLayout]="'inline'"
+    [formGroup]="loginForm"
+    (ngSubmit)="login()"
+    class="login-form"
+  >
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your username!">
+      <nz-form-control nzErrorTip="Please input your email!">
         <nz-input-group nzPrefixIcon="user">
-          <input type="text" nz-input formControlName="userName" placeholder="Username" />
+          <input
+            type="text"
+            nz-input
+            formControlName="email"
+            placeholder="Email"
+          />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="Please input your Password!">
         <nz-input-group nzPrefixIcon="lock">
-          <input type="password" nz-input formControlName="password" placeholder="Password" />
+          <input
+            type="password"
+            nz-input
+            formControlName="password"
+            placeholder="Password"
+          />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
@@ -23,7 +40,14 @@
         <a class="login-form-forgot">Forgot password</a>
       </div>
     </div>
-    <button nz-button class="login-form-button login-form-margin">Log in</button>
+    <button
+      nzType="primary"
+      nz-button
+      class="login-form-button login-form-margin"
+    >
+      Log in
+    </button>
     Or
     <a>register now!</a>
   </form>
+</div>
