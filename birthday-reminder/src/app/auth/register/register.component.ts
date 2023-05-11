@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Subject, filter, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +25,9 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private fb: UntypedFormBuilder
+    private fb: UntypedFormBuilder,
+    private router: Router,
+    private message: NzMessageService
   ) {}
 
   ngOnInit(): void {
@@ -58,10 +62,28 @@ export class RegisterComponent implements OnInit {
         this.password1,
         this.password2
       )
-      .subscribe((success) => {
-        if (success) {
-          console.log('Register is successfully');
+      .subscribe({
+        next: () => {
+            this.router.navigate(['/login']);
+            this.message.success('Registered successfully');
+        },
+        error: (error) => {
+          console.error(error);
+          if (error.error instanceof Object) {
+            for (let key in error.error) {
+              if (error.error[key] instanceof Array) {
+                error.error[key].forEach((errorMessage: string) => {
+                  this.message.error(errorMessage);
+                });
+              } else {
+                this.message.error(error.error[key]);
+              }
+            }
+          } else {
+            this.message.error(error.error || 'Register failed');
+          }
         }
+        
       });
   }
 

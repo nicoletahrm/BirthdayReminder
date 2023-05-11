@@ -3,6 +3,7 @@ import { Friend } from 'src/app/inferfaces/friend.interface';
 import { FriendService } from '../friend.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-friends',
@@ -16,7 +17,8 @@ export class FriendsComponent implements OnInit {
     private friendService: FriendService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private message: NzMessageService
   ) {}
 
   ngOnInit(): void {
@@ -27,5 +29,6 @@ export class FriendsComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.message.success("Logged out successfully");
   }
 }

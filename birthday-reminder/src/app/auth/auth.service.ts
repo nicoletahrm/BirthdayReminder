@@ -9,25 +9,22 @@ import { throwError } from 'rxjs';
 export class AuthService {
   private baseUrl: string = 'http://16.16.127.251:8000/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {console.log(this);}
 
   login(email: string, password: string, rememberMe: boolean) {
     return this.http
       .post<{ access: string; refresh: string }>(
         `${this.baseUrl}/users/login/`,
-        {
-          email,
-          password,
-        }
+        { email, password }
       )
       .pipe(
         tap((res) => {
-          console.log(res.access);
           this.storeAccessToken(res.access, rememberMe);
           this.storeRefreshToken(res.refresh, rememberMe);
         })
       );
   }
+  
 
   register(
     email: string,
@@ -59,22 +56,25 @@ export class AuthService {
   }
 
   refreshToken() {
-    const refreshToken = localStorage.getItem('refresh_token');
+    const refresh = localStorage.getItem('refresh_token');
+    
+    if (!refresh) {
+      return throwError('No refresh token');
+    }
+  
     return this.http
       .post<{ access: string }>(`${this.baseUrl}/users/login/refresh/`, {
-        refreshToken,
+        refresh,
       })
       .pipe(
         tap((res) => {
           localStorage.setItem('access_token', res.access);
+        }),
+        catchError((error) => {
+          console.error('Failed to refresh token:', error);
+          return throwError(error);
         })
       );
-  }
-
-  handleError401(err: any) {
-    if (err.status === 401) {
-      this.refreshToken().subscribe();
-    }
   }
 
   private storeAccessToken(jwt: string, rememberMe: boolean) {
@@ -86,6 +86,7 @@ export class AuthService {
   }
 
   private storeRefreshToken(jwt: string, rememberMe: boolean) {
+    console.log('storeRefreshToken = ' + jwt)
     if (rememberMe) {
       localStorage.setItem('refresh_token', jwt);
     } else {

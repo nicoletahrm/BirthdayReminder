@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Subject, filter, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +23,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private fb: UntypedFormBuilder
+    private fb: UntypedFormBuilder, 
+    private router: Router,
+    private message: NzMessageService
   ) {}
 
   ngOnInit(): void {
@@ -46,19 +50,29 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService
       .login(this.email, this.password, this.remember)
-      .subscribe((success) => {
-        if (success) {
-          console.log('Logged in successfully');
+      .subscribe({
+        next: (response) => {
+          if (response.access) {
+            this.router.navigate(['/friends']);
+            this.message.success('Logged in successfully');
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.message.error(error.error.detail || 'Login failed');
         }
       });
   }
+  
 
   get getEmail() {
     return this.loginForm.get('email');
   }
+
   get getPassword() {
     return this.loginForm.get('password');
   }
+
   get getRemember() {
     return this.loginForm.get('remember');
   }

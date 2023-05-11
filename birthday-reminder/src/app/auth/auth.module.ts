@@ -9,7 +9,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
-import { AuthInterceptor } from './auth.interceptor';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
@@ -24,6 +24,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzIconModule,
     NzButtonModule,
     NzCheckboxModule,
+    NzMessageModule
   ],
   // providers: [
   //   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
