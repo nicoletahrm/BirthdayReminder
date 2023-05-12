@@ -1,11 +1,20 @@
 [nz-form] {
-  max-width: 600px;
+  width: 700px;
+  justify-content: center;
 }
 
-.phone-select {
-  width: 70px;
+.register-area {
+  margin-bottom: 10px;
 }
 
-.register-are {
-  margin-bottom: 8px;
+.center-container {
+  justify-content: center;
+  display: flex;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }

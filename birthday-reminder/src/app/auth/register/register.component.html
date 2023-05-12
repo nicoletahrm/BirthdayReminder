@@ -1,95 +1,115 @@
-<form
-  nz-form
-  [formGroup]="registerForm"
-  class="login-form"
-  (ngSubmit)="register()"
->
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired
-      >Email</nz-form-label
-    >
+<div class="main-container">
+  <form nz-form [formGroup]="registerForm" (ngSubmit)="register()">
+    <nz-form-item nz-row class="register-area">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired
+        >Email</nz-form-label
+      >
 
-    <nz-form-control nzErrorTip="Please input your email!">
-      <nz-input-group>
-        <input type="text" nz-input formControlName="email" id="email" />
-      </nz-input-group>
-    </nz-form-control>
-  </nz-form-item>
+      <nz-form-control
+        [nzSm]="14"
+        [nzXs]="24"
+        nzErrorTip="Please input your email!"
+      >
+        <nz-input-group>
+          <input type="text" nz-input formControlName="email" id="email" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item nz-row class="register-area">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="firstName" nzRequired
-      >First name</nz-form-label
-    >
+    <nz-form-item nz-row class="register-area">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="firstName" nzRequired
+        >First name</nz-form-label
+      >
 
-    <nz-form-control nzErrorTip="Please input your first name!">
-      <nz-input-group>
+      <nz-form-control
+        [nzSm]="14"
+        [nzXs]="24"
+        nzErrorTip="Please input your first name!"
+      >
+        <nz-input-group>
+          <input
+            type="text"
+            nz-input
+            formControlName="firstName"
+            id="firstName"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row class="register-area">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="lastName" nzRequired
+        >Last name</nz-form-label
+      >
+
+      <nz-form-control
+        [nzSm]="14"
+        [nzXs]="24"
+        nzErrorTip="Please input your last name!"
+      >
+        <nz-input-group>
+          <input
+            type="text"
+            nz-input
+            formControlName="lastName"
+            id="lastName"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row class="register-area">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired
+        >Password</nz-form-label
+      >
+      <nz-form-control
+        [nzSm]="14"
+        [nzXs]="24"
+        nzErrorTip="Please input your password!"
+      >
         <input
-          type="text"
           nz-input
-          formControlName="firstName"
-          id="firstName"
+          type="password"
+          id="password"
+          formControlName="password1"
         />
-      </nz-input-group>
-    </nz-form-control>
-  </nz-form-item>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item nz-row class="register-area">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="lastName" nzRequired
-      >Last name</nz-form-label
-    >
+    <nz-form-item nz-row class="register-area">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired
+        >Confirm Password</nz-form-label
+      >
+      <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+        <input
+          nz-input
+          type="password"
+          formControlName="password2"
+          id="checkPassword"
+        />
+        <ng-template #errorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')"
+            >Please confirm your password!</ng-container
+          >
+          <ng-container *ngIf="control.hasError('confirm')">
+            Two passwords that you enter is inconsistent!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
 
-    <nz-form-control nzErrorTip="Please input your last name!">
-      <nz-input-group>
-        <input type="text" nz-input formControlName="lastName" id="lastName" />
-      </nz-input-group>
-    </nz-form-control>
-  </nz-form-item>
+    <br />
 
-  <nz-form-item nz-row class="register-area">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired
-      >Password</nz-form-label
-    >
-    <nz-form-control
-      [nzSm]="14"
-      [nzXs]="24"
-      nzErrorTip="Please input your password!"
-    >
-      <input
-        nz-input
-        type="password"
-        id="password"
-        formControlName="password1"
-      />
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item nz-row>
+      <nz-form-control [nzSpan]="14" [nzOffset]="11">
+        <button nz-button nzType="primary">Register</button>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item nz-row class="register-area">
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired
-      >Confirm Password</nz-form-label
-    >
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
-      <input
-        nz-input
-        type="password"
-        formControlName="password2"
-        id="checkPassword"
-      />
-      <ng-template #errorTpl let-control>
-        <ng-container *ngIf="control.hasError('required')"
-          >Please confirm your password!</ng-container
-        >
-        <ng-container *ngIf="control.hasError('confirm')">
-          Two passwords that you enter is inconsistent!
-        </ng-container>
-      </ng-template>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item nz-row class="register-area">
-    <nz-form-control [nzSpan]="14" [nzOffset]="6">
-      <button nz-button nzType="primary">Register</button>
-    </nz-form-control>
-  </nz-form-item>
-
-  <a [routerLink]="['/login']">Log in</a>
-</form>
+    <nz-form-item nz-row>
+      <nz-form-control [nzSpan]="14" [nzOffset]="9">
+        <p>Already have an account? <a [routerLink]="['/login']">Log in</a></p>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>

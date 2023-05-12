@@ -1,22 +1,16 @@
-.login-form {
-  max-width: 300px;
+[nz-form] {
+  width: 300px;
+  justify-content: center;
 }
 
-.login-form-margin {
-  margin-bottom: 16px;
-}
-
-.login-form-forgot {
-  float: right;
-}
-
-.login-form-button {
-  width: 100%;
-}
-
-.login-container {
+.center-container {
   justify-content: center;
   display: flex;
-  margin: auto;
-  padding: 25%;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }

@@ -8,18 +8,24 @@
   Log out
 </button>
 
-<div class="row">
-  <div class="col-md-2">Filter by:</div>
-  <div class="col-md-4">
-    <input type="text" [(ngModel)]="listFilter" />
-  </div>
+<nz-form-item class="search-bar">
+  <nz-form-control>
+    <nz-input-group>
+      <input
+        type="text"
+        nz-input
+        placeholder="Search..."
+        [(ngModel)]="listFilter"
+      />
+    </nz-input-group>
+  </nz-form-control>
+</nz-form-item>
+
+<div class="add-button">
+  <button nz-button nzType="primary" [routerLink]="'/add'">Add friend</button>
 </div>
 
 <div class="table-container">
-  <div class="table-operations">
-    <button nz-button nzType="primary" [routerLink]="'/add'">Add</button>
-  </div>
-
   <nz-table #basicTable [nzData]="filteredFriends" [nzPageSize]="5">
     <thead>
       <tr>
@@ -30,6 +36,7 @@
         <th>Birthday date</th>
       </tr>
     </thead>
+
     <tbody>
       <tr *ngFor="let friend of filteredFriends">
         <td nzLeft>{{ friend.first_name }}</td>
@@ -39,15 +46,13 @@
         <td nzLeft>{{ friend.birthday_date }}</td>
 
         <!-- <td>
-            <button
-              nz-button
-              nzType="primary"
-              [routerLink]="['/edit', person.name]"
-              (click)="editPerson(person)"
-            >
-              <i nz-icon nzType="edit"></i>
-            </button>
-          </td> -->
+          <button
+            nz-button
+            nzType="primary"
+          >
+            Delete
+          </button>
+        </td> -->
       </tr>
     </tbody>
   </nz-table>

@@ -9,9 +9,10 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { HttpClientModule } from '@angular/common/http';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { AddFriendComponent } from './add-friend/add-friend.component';
 
 @NgModule({
-  declarations: [FriendsComponent],
+  declarations: [FriendsComponent, AddFriendComponent],
   imports: [
     CommonModule,
     FriendsTableRoutingModule,
