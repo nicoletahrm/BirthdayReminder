@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Friend } from '../inferfaces/friend.interface';
 import { Observable } from 'rxjs';
@@ -11,7 +11,25 @@ export class FriendService {
 
   constructor(private http: HttpClient) {}
 
+  readonly httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
+
   getFriends(): Observable<Friend[]> {
     return this.http.get<Friend[]>(`${this.baseUrl}/friends`);
+  }
+
+  postFriend(friend: Friend): Observable<Friend> {
+    return this.http.post<Friend>(
+      `${this.baseUrl}/friends`,
+      friend,
+      this.httpOptions
+    );
+  }
+
+  deleteFriend(id: string): Observable<Friend> {
+    return this.http.delete<Friend>(`${this.baseUrl}/friends/` + id);
   }
 }
