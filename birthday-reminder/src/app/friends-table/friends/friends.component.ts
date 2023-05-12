@@ -11,7 +11,21 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrls: ['./friends.component.scss'],
 })
 export class FriendsComponent implements OnInit {
-  friends: Friend[] = [];
+  friends: Friend[];
+  filteredFriends: Friend[];
+
+  _listFilter: string;
+
+  get listFilter(): string {
+    return this._listFilter;
+  }
+
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredFriends = this.listFilter
+      ? this.performFilter(this.listFilter)
+      : this.friends;
+  }
 
   constructor(
     private friendService: FriendService,
@@ -22,13 +36,26 @@ export class FriendsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.friendService
-      .getFriends()
-      .subscribe((friends) => (this.friends = friends));
+    this.friendService.getFriends().subscribe({
+      next: (friends) => {
+        this.friends = friends;
+        this.filteredFriends = friends;
+      },
+    });
+  }
+
+  performFilter(filterBy: string): Friend[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.friends.filter(
+      (product: Friend) =>
+        product.first_name.toLocaleLowerCase().indexOf(filterBy) !== -1 ||
+        product.last_name.toLocaleLowerCase().indexOf(filterBy) !== -1 ||
+        product.city.toLocaleLowerCase().indexOf(filterBy) !== -1
+    );
   }
 
   logout() {
     this.authService.logout();
-    this.message.success("Logged out successfully");
+    this.message.success('Logged out successfully');
   }
 }

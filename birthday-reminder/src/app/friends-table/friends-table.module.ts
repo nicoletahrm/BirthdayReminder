@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FriendsTableRoutingModule } from './friends-table-routing.module';
 import { FriendsComponent } from './friends/friends.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -16,12 +16,13 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     CommonModule,
     FriendsTableRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     NzFormModule,
     NzInputModule,
     NzTableModule,
     HttpClientModule,
     NzButtonModule,
-    NzMessageModule
+    NzMessageModule,
   ],
 })
 export class FriendsTableModule {}
