@@ -6,6 +6,7 @@
       >
 
       <nz-form-control
+        nzHasFeedback
         [nzSm]="14"
         [nzXs]="24"
         nzErrorTip="Please input your email!"
@@ -22,6 +23,7 @@
       >
 
       <nz-form-control
+        nzHasFeedback
         [nzSm]="14"
         [nzXs]="24"
         nzErrorTip="Please input your first name!"
@@ -43,6 +45,7 @@
       >
 
       <nz-form-control
+        nzHasFeedback
         [nzSm]="14"
         [nzXs]="24"
         nzErrorTip="Please input your last name!"
@@ -63,6 +66,7 @@
         >Password</nz-form-label
       >
       <nz-form-control
+        nzHasFeedback
         [nzSm]="14"
         [nzXs]="24"
         nzErrorTip="Please input your password!"
@@ -80,7 +84,12 @@
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired
         >Confirm Password</nz-form-label
       >
-      <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+      <nz-form-control
+        nzHasFeedback
+        [nzSm]="14"
+        [nzXs]="24"
+        [nzErrorTip]="errorTpl"
+      >
         <input
           nz-input
           type="password"
