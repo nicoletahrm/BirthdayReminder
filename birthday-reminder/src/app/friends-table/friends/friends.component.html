@@ -1,12 +1,14 @@
-<button
-  nz-button
-  nzType="primary"
-  [routerLink]="'/login'"
-  type="submit"
-  (click)="logout()"
->
-  Log out
-</button>
+<div class="add-button">
+  <button
+    nz-button
+    nzType="default"
+    nzDanger
+    [routerLink]="'/login'"
+    (click)="logout()"
+  >
+    Log out
+  </button>
+</div>
 
 <nz-form-item class="search-bar">
   <nz-form-control>
@@ -22,37 +24,45 @@
 </nz-form-item>
 
 <div class="add-button">
-  <button nz-button nzType="primary" [routerLink]="'/add-friend'">Add friend</button>
+  <button nz-button nzType="primary" [routerLink]="'/add-friend'">
+    Add friend
+  </button>
 </div>
 
 <div class="table-container">
   <nz-table #basicTable [nzData]="filteredFriends" [nzPageSize]="5">
     <thead>
       <tr>
+        <th>Id</th>
         <th>First name</th>
         <th>Last name</th>
         <th>Phone number</th>
         <th>City</th>
         <th>Birthday date</th>
+        <th></th>
       </tr>
     </thead>
 
     <tbody>
       <tr *ngFor="let friend of filteredFriends">
+        <td nzLeft>{{ friend.id }}</td>
         <td nzLeft>{{ friend.first_name }}</td>
         <td nzLeft>{{ friend.last_name }}</td>
         <td nzLeft>{{ friend.phone_number }}</td>
         <td nzLeft>{{ friend.city }}</td>
         <td nzLeft>{{ friend.birthday_date }}</td>
 
-        <!-- <td>
+        <td>
           <button
             nz-button
             nzType="primary"
+            nzDanger
+            [routerLink]="'/friends'"
+            (click)="deleteFriend()"
           >
             Delete
           </button>
-        </td> -->
+        </td>
       </tr>
     </tbody>
   </nz-table>

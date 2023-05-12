@@ -29,7 +29,7 @@ export class FriendService {
     );
   }
 
-  deleteFriend(id: string): Observable<Friend> {
+  deleteFriend(id: number): Observable<Friend> {
     return this.http.delete<Friend>(`${this.baseUrl}/friends/` + id);
   }
 }

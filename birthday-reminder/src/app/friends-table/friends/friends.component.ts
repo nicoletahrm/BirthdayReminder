@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Friend } from 'src/app/inferfaces/friend.interface';
 import { FriendService } from '../friend.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class FriendsComponent implements OnInit {
   friends: Friend[];
   filteredFriends: Friend[];
+  @Input('friend') friend: Friend;
 
   _listFilter: string;
 
@@ -42,6 +43,10 @@ export class FriendsComponent implements OnInit {
         this.filteredFriends = friends;
       },
     });
+  }
+
+  deleteFriend() {
+    this.friendService.deleteFriend(this.friend.id).subscribe();
   }
 
   performFilter(filterBy: string): Friend[] {
