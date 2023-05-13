@@ -13,7 +13,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class FriendsComponent implements OnInit {
   friends: Friend[];
   filteredFriends: Friend[];
-  @Input('friend') friend: Friend;
 
   _listFilter: string;
 
@@ -45,17 +44,29 @@ export class FriendsComponent implements OnInit {
     });
   }
 
-  deleteFriend() {
-    this.friendService.deleteFriend(this.friend.id).subscribe();
+  deleteFriend(id: any) {
+    this.friendService.deleteFriend(id).subscribe(
+      {
+        next: () => {
+          this.filteredFriends = this.filteredFriends.filter(friend => friend.id !== id);
+          this.message.success('Deleted successfully');
+        },
+        error: (error) => {
+          console.error(error);
+          this.message.error(error.error.detail || 'Deletion failed');
+        }
+      }
+    );
+    
   }
 
   performFilter(filterBy: string): Friend[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.friends.filter(
-      (product: Friend) =>
-        product.first_name.toLocaleLowerCase().indexOf(filterBy) !== -1 ||
-        product.last_name.toLocaleLowerCase().indexOf(filterBy) !== -1 ||
-        product.city.toLocaleLowerCase().indexOf(filterBy) !== -1
+      (friend: Friend) =>
+        friend.first_name.toLocaleLowerCase().indexOf(filterBy) !== -1 ||
+        friend.last_name.toLocaleLowerCase().indexOf(filterBy) !== -1 ||
+        friend.city.toLocaleLowerCase().indexOf(filterBy) !== -1
     );
   }
 

@@ -1,5 +1,5 @@
 export interface Friend {
-  id: number;
+  id?: number;
   first_name: String;
   last_name: String;
   phone_number: String;

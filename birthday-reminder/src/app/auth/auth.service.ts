@@ -86,7 +86,6 @@ export class AuthService {
   }
 
   private storeRefreshToken(jwt: string, rememberMe: boolean) {
-    console.log('storeRefreshToken = ' + jwt)
     if (rememberMe) {
       localStorage.setItem('refresh_token', jwt);
     } else {

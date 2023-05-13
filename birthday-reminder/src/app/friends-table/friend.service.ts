@@ -21,15 +21,15 @@ export class FriendService {
     return this.http.get<Friend[]>(`${this.baseUrl}/friends`);
   }
 
-  postFriend(friend: Friend): Observable<Friend> {
-    return this.http.post<Friend>(
-      `${this.baseUrl}/friends`,
+  postFriend(friend: Friend): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}/friends/`,
       friend,
       this.httpOptions
     );
   }
 
   deleteFriend(id: number): Observable<Friend> {
-    return this.http.delete<Friend>(`${this.baseUrl}/friends/` + id);
+    return this.http.delete<Friend>(`${this.baseUrl}/friends/${id}/`);
   }
 }

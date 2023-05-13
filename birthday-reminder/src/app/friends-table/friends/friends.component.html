@@ -33,7 +33,6 @@
   <nz-table #basicTable [nzData]="filteredFriends" [nzPageSize]="5">
     <thead>
       <tr>
-        <th>Id</th>
         <th>First name</th>
         <th>Last name</th>
         <th>Phone number</th>
@@ -45,7 +44,6 @@
 
     <tbody>
       <tr *ngFor="let friend of filteredFriends">
-        <td nzLeft>{{ friend.id }}</td>
         <td nzLeft>{{ friend.first_name }}</td>
         <td nzLeft>{{ friend.last_name }}</td>
         <td nzLeft>{{ friend.phone_number }}</td>
@@ -58,7 +56,7 @@
             nzType="primary"
             nzDanger
             [routerLink]="'/friends'"
-            (click)="deleteFriend()"
+            (click)="deleteFriend(friend.id != null ? friend.id : null)"
           >
             Delete
           </button>

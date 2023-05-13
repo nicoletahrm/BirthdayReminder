@@ -83,7 +83,6 @@ export class RegisterComponent implements OnInit {
             this.message.error(error.error || 'Register failed');
           }
         }
-        
       });
   }
 

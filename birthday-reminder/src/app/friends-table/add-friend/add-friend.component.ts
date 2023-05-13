@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { Friend } from 'src/app/inferfaces/friend.interface';
 import { FriendService } from '../friend.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-add-friend',
@@ -27,7 +28,8 @@ export class AddFriendComponent implements OnInit {
   constructor(
     private friendService: FriendService,
     private fb: UntypedFormBuilder,
-    private router: Router
+    private router: Router,
+    private message: NzMessageService
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +57,6 @@ export class AddFriendComponent implements OnInit {
 
   addFriend() {
     this.newFriend = {
-      id: 0,
       first_name: this.firstName,
       last_name: this.lastName,
       phone_number: this.phoneNumber,
@@ -63,7 +64,30 @@ export class AddFriendComponent implements OnInit {
       birthday_date: this.birthdayDate,
     };
 
-    this.friendService.postFriend(this.newFriend).subscribe();
+    this.friendService.postFriend(this.newFriend).subscribe({
+      next: (response) => {
+        if (response.message) {
+          this.router.navigate(['/friends']);
+          this.message.success(`${response.friend.first_name} added successfully`);
+        }
+      },
+      error: (error) => {
+        console.error(error);
+        if (error.error instanceof Object) {
+          for (let key in error.error) {
+            if (error.error[key] instanceof Array) {
+              error.error[key].forEach((errorMessage: string) => {
+                this.message.error(errorMessage);
+              });
+            } else {
+              this.message.error(error.error[key]);
+            }
+          }
+        } else {
+          this.message.error(error.error || 'Add friend failed');
+        }
+      }
+    });
   }
 
   resetForm(e: MouseEvent): void {
