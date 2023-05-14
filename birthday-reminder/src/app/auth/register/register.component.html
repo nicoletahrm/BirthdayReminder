@@ -62,14 +62,12 @@
     </nz-form-item>
 
     <nz-form-item nz-row class="register-area">
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired
-        >Password</nz-form-label
-      >
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
       <nz-form-control
         nzHasFeedback
         [nzSm]="14"
         [nzXs]="24"
-        nzErrorTip="Please input your password!"
+        [nzErrorTip]="passwordErrorTpl"
       >
         <input
           nz-input
@@ -77,6 +75,14 @@
           id="password"
           formControlName="password1"
         />
+        <ng-template #passwordErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your password!
+          </ng-container>
+          <ng-container *ngIf="!control.hasError('required') && control.hasError('passwordStrength')">
+            Password must contain at least one lower case letter, one upper case letter, and one number!
+          </ng-container>
+        </ng-template>
       </nz-form-control>
     </nz-form-item>
 

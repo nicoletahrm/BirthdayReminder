@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Friend } from '../inferfaces/friend.interface';
+import { Friend } from '../../inferfaces/friend.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({

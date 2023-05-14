@@ -7,7 +7,7 @@ import {
 import { Router } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { Friend } from 'src/app/inferfaces/friend.interface';
-import { FriendService } from '../friend.service';
+import { FriendService } from '../services/friend.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({

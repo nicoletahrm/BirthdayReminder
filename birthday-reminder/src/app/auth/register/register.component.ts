@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import {
+  AbstractControl,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
@@ -8,6 +9,7 @@ import {
 import { Subject, filter, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { CustomValidators } from 'src/app/helpers/custom-validators';
 
 @Component({
   selector: 'app-register',
@@ -32,10 +34,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      email: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
-      password1: [null, [Validators.required]],
+      password1: [null, [Validators.required, CustomValidators.passwordStrength()]],
       password2: [null, [Validators.required]],
     });
 
@@ -86,23 +88,23 @@ export class RegisterComponent implements OnInit {
       });
   }
 
-  get getEmail() {
+  get getEmail(): AbstractControl | null {
     return this.registerForm.get('email');
   }
 
-  get getFirstName() {
+  get getFirstName(): AbstractControl | null {
     return this.registerForm.get('firstName');
   }
 
-  get getLastName() {
+  get getLastName(): AbstractControl | null {
     return this.registerForm.get('lastName');
   }
 
-  get getPassword1() {
+  get getPassword1(): AbstractControl | null {
     return this.registerForm.get('password1');
   }
 
-  get getPassword2() {
+  get getPassword2(): AbstractControl | null {
     return this.registerForm.get('password2');
   }
 }

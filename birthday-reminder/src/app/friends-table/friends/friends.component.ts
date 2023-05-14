@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Friend } from 'src/app/inferfaces/friend.interface';
-import { FriendService } from '../friend.service';
+import { FriendService } from '../services/friend.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
@@ -45,8 +45,7 @@ export class FriendsComponent implements OnInit {
   }
 
   deleteFriend(id: any) {
-    this.friendService.deleteFriend(id).subscribe(
-      {
+    this.friendService.deleteFriend(id).subscribe({
         next: () => {
           this.filteredFriends = this.filteredFriends.filter(friend => friend.id !== id);
           this.message.success('Deleted successfully');
@@ -55,9 +54,7 @@ export class FriendsComponent implements OnInit {
           console.error(error);
           this.message.error(error.error.detail || 'Deletion failed');
         }
-      }
-    );
-    
+      });   
   }
 
   performFilter(filterBy: string): Friend[] {
