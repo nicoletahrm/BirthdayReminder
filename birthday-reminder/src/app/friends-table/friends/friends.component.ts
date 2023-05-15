@@ -46,15 +46,17 @@ export class FriendsComponent implements OnInit {
 
   deleteFriend(id: any) {
     this.friendService.deleteFriend(id).subscribe({
-        next: () => {
-          this.filteredFriends = this.filteredFriends.filter(friend => friend.id !== id);
-          this.message.success('Deleted successfully');
-        },
-        error: (error) => {
-          console.error(error);
-          this.message.error(error.error.detail || 'Deletion failed');
-        }
-      });   
+      next: () => {
+        this.filteredFriends = this.filteredFriends.filter(
+          (friend) => friend.id !== id
+        );
+        this.message.success('Deleted successfully');
+      },
+      error: (error) => {
+        console.error(error);
+        this.message.error(error.error.detail || 'Deletion failed');
+      },
+    });
   }
 
   performFilter(filterBy: string): Friend[] {
@@ -65,6 +67,10 @@ export class FriendsComponent implements OnInit {
         friend.last_name.toLocaleLowerCase().indexOf(filterBy) !== -1 ||
         friend.city.toLocaleLowerCase().indexOf(filterBy) !== -1
     );
+  }
+
+  editFriend(id: any) {
+    this.router.navigate(['friends/add-friend', id]);
   }
 
   logout() {
