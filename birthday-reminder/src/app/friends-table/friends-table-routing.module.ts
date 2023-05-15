@@ -6,14 +6,14 @@ import { AuthGuard } from '../auth/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'friends',
+    path: '',
     component: FriendsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'add-friend',
     component: AddFriendComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
 ];
 

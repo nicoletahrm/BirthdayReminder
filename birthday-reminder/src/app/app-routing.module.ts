@@ -16,12 +16,12 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'friends',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
-    path: '**', 
-    redirectTo: 'auth/login'
-  }
+    path: '**',
+    redirectTo: 'auth/login',
+  },
 ];
 
 @NgModule({

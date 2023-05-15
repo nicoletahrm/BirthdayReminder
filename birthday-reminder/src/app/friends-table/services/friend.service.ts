@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class FriendService {
-  private baseUrl: string = 'http://16.16.127.251:8000/api';
+  private baseUrl: string = 'http://13.50.242.165:8000/api';
 
   constructor(private http: HttpClient) {}
 
@@ -22,11 +22,7 @@ export class FriendService {
   }
 
   postFriend(friend: Friend): Observable<any> {
-    return this.http.post(
-      `${this.baseUrl}/friends/`,
-      friend,
-      this.httpOptions
-    );
+    return this.http.post(`${this.baseUrl}/friends/`, friend, this.httpOptions);
   }
 
   deleteFriend(id: number): Observable<Friend> {

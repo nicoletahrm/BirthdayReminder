@@ -7,9 +7,11 @@ import { throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl: string = 'http://16.16.127.251:8000/api';
+  private baseUrl: string = 'http://13.50.242.165:8000/api';
 
-  constructor(private http: HttpClient) {console.log(this);}
+  constructor(private http: HttpClient) {
+    console.log(this);
+  }
 
   login(email: string, password: string, rememberMe: boolean) {
     return this.http
@@ -24,7 +26,6 @@ export class AuthService {
         })
       );
   }
-  
 
   register(
     email: string,
@@ -57,11 +58,11 @@ export class AuthService {
 
   refreshToken() {
     const refresh = localStorage.getItem('refresh_token');
-    
+
     if (!refresh) {
       return throwError('No refresh token');
     }
-  
+
     return this.http
       .post<{ access: string }>(`${this.baseUrl}/users/login/refresh/`, {
         refresh,
