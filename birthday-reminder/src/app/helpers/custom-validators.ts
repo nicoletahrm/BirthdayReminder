@@ -15,4 +15,23 @@ export class CustomValidators {
           return null;
         };
     }
+
+    static dateValidator: ValidatorFn = (
+      control: AbstractControl
+    ): { [key: string]: any } | null => {
+      let date = control.value;
+  
+      if (date === '' || date == null) {
+        return null;
+      }
+  
+      const selectedDate = new Date(control.value);
+      const currentDate = new Date();
+  
+      if (selectedDate > currentDate) {
+        return { dateInFuture: true };
+      }
+  
+      return null;
+    };
   }

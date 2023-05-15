@@ -7,6 +7,7 @@
       <nz-form-label [nzSpan]="7">First name</nz-form-label>
       <nz-form-control [nzSpan]="12">
         <input
+          [(ngModel)]="friend.first_name"
           nz-input
           formControlName="first_name"
           placeholder="First name"
@@ -19,6 +20,7 @@
       <nz-form-label [nzSpan]="7">Last name</nz-form-label>
       <nz-form-control [nzSpan]="12">
         <input
+          [(ngModel)]="friend.last_name"
           nz-input
           formControlName="last_name"
           placeholder="Last name"
@@ -31,6 +33,7 @@
       <nz-form-label [nzSpan]="7">Phone number</nz-form-label>
       <nz-form-control [nzSpan]="12">
         <input
+          [(ngModel)]="friend.phone_number"
           nz-input
           formControlName="phone_number"
           placeholder="Phone number"
@@ -42,7 +45,13 @@
     <nz-form-item>
       <nz-form-label [nzSpan]="7">City</nz-form-label>
       <nz-form-control [nzSpan]="12">
-        <input nz-input type="text" formControlName="city" placeholder="City" />
+        <input
+          [(ngModel)]="friend.city"
+          nz-input
+          type="text"
+          formControlName="city"
+          placeholder="City"
+        />
       </nz-form-control>
     </nz-form-item>
 
@@ -50,6 +59,7 @@
       <nz-form-label [nzSpan]="7">Birthday date</nz-form-label>
       <nz-form-control [nzSpan]="12">
         <input
+          [(ngModel)]="friend.birthday_date"
           nz-input
           formControlName="birthday_date"
           placeholder="Birthday date"
@@ -61,17 +71,31 @@
     <nz-form-item>
       <nz-form-control [nzOffset]="7" [nzSpan]="12">
         <button
+          [disabled]="!addFriendForm.valid"
+          *ngIf="isEdit == false"
           nz-button
           nzType="primary"
           style="margin-right: 8px"
         >
           Add
         </button>
+        <button
+          *ngIf="isEdit == true"
+          nz-button
+          nzType="primary"
+          style="margin-right: 8px"
+          (click)="editFriend()"
+          [routerLink]="'/friends'"
+        >
+          Save
+        </button>
         <button nz-button (click)="resetForm($event)" style="margin-right: 8px">
           Reset
         </button>
 
-        <button nz-button [routerLink]="'/friends'">Back</button>
+        <button nzType="primary" nzDanger nz-button [routerLink]="'/friends'">
+          Back
+        </button>
       </nz-form-control>
     </nz-form-item>
   </form>

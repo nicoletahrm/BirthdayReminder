@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -9,6 +9,7 @@ import { Subject, filter, takeUntil } from 'rxjs';
 import { Friend } from 'src/app/inferfaces/friend.interface';
 import { FriendService } from '../services/friend.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { CustomValidators } from 'src/app/helpers/custom-validators';
 
 @Component({
   selector: 'app-add-friend',
@@ -25,6 +26,17 @@ export class AddFriendComponent implements OnInit {
   city: string;
   birthdayDate: string;
 
+  isEdit: boolean = false;
+
+  @Input() friend: Friend = {
+    id: 0,
+    first_name: '',
+    last_name: '',
+    city: '',
+    phone_number: '',
+    birthday_date: '',
+  };
+
   constructor(
     private friendService: FriendService,
     private fb: UntypedFormBuilder,
@@ -38,7 +50,7 @@ export class AddFriendComponent implements OnInit {
       last_name: [null, [Validators.required]],
       phone_number: [null, [Validators.required]],
       city: [null, [Validators.required]],
-      birthday_date: [null, [Validators.required]],
+      birthday_date: [null, [Validators.required, CustomValidators.dateValidator]],
     });
 
     this.addFriendForm.valueChanges
@@ -53,6 +65,8 @@ export class AddFriendComponent implements OnInit {
         this.city = this.getCity?.value;
         this.birthdayDate = this.getBirthdayDate?.value;
       });
+
+    this.friend = history.state;
   }
 
   addFriend() {
@@ -68,7 +82,9 @@ export class AddFriendComponent implements OnInit {
       next: (response) => {
         if (response.message) {
           this.router.navigate(['/friends']);
-          this.message.success(`${response.friend.first_name} added successfully`);
+          this.message.success(
+            `${response.friend.first_name} added successfully`
+          );
         }
       },
       error: (error) => {
@@ -86,8 +102,26 @@ export class AddFriendComponent implements OnInit {
         } else {
           this.message.error(error.error || 'Add friend failed');
         }
-      }
+      },
     });
+  }
+
+  editFriend() {
+    console.log(this.isEdit);
+    this.isEdit = true;
+
+    console.log(this.isEdit);
+
+    this.newFriend = {
+      id: this.friend.id,
+      first_name: this.friend.first_name,
+      last_name: this.friend.last_name,
+      city: this.friend.city,
+      phone_number: this.friend.phone_number,
+      birthday_date: this.friend.birthday_date,
+    };
+
+    this.friendService.putFriend(this.newFriend).subscribe();
   }
 
   resetForm(e: MouseEvent): void {

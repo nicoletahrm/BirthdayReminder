@@ -69,10 +69,6 @@ export class FriendsComponent implements OnInit {
     );
   }
 
-  editFriend(id: any) {
-    this.router.navigate(['friends/add-friend', id]);
-  }
-
   logout() {
     this.authService.logout();
     this.message.success('Logged out successfully');

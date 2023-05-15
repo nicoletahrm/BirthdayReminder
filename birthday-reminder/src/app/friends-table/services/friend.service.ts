@@ -27,6 +27,10 @@ export class FriendService {
     );
   }
 
+  putFriend(friend: Friend) {
+    return this.http.put(`${this.baseUrl}/friends/`, friend, this.httpOptions);
+  }
+
   postFriend(friend: Friend): Observable<any> {
     return this.http.post(`${this.baseUrl}/friends/`, friend, this.httpOptions);
   }

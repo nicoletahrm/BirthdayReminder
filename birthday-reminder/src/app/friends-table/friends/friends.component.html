@@ -1,7 +1,7 @@
 <div class="add-button">
   <button
     nz-button
-    nzType="default"
+    nzType="primary"
     nzDanger
     [routerLink]="'/login'"
     (click)="logout()"
@@ -58,8 +58,8 @@
             style="margin-right: 10px"
             nz-button
             nzType="primary"
-            [routerLink]="['/friends/add-friend', friend.id]"
-            (click)="editFriend(friend.id != null ? friend.id : null)"
+            [routerLink]="['/friends/edit-friend']"
+            [state]="friend"
           >
             Edit
           </button>
