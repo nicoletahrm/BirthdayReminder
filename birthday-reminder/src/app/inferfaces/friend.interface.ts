@@ -1,8 +1,8 @@
 export interface Friend {
   id?: number;
-  first_name: String;
-  last_name: String;
-  phone_number: String;
-  city: String;
-  birthday_date: String;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  city: string;
+  birthday_date: string;
 }

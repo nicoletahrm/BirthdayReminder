@@ -10,9 +10,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { AddFriendComponent } from './add-friend/add-friend.component';
+import { FriendDetailsComponent } from './friend-details/friend-details.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 @NgModule({
-  declarations: [FriendsComponent, AddFriendComponent],
+  declarations: [FriendsComponent, AddFriendComponent, FriendDetailsComponent],
   imports: [
     CommonModule,
     FriendsTableRoutingModule,
@@ -24,6 +26,7 @@ import { AddFriendComponent } from './add-friend/add-friend.component';
     HttpClientModule,
     NzButtonModule,
     NzMessageModule,
+    NzCardModule,
   ],
 })
 export class FriendsTableModule {}

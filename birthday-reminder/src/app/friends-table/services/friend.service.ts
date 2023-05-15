@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Friend } from '../../inferfaces/friend.interface';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +19,12 @@ export class FriendService {
 
   getFriends(): Observable<Friend[]> {
     return this.http.get<Friend[]>(`${this.baseUrl}/friends`);
+  }
+
+  getFriendById(id: number): Observable<Friend | undefined> {
+    return this.getFriends().pipe(
+      map((friends: Friend[]) => friends.find((p) => p.id === id))
+    );
   }
 
   postFriend(friend: Friend): Observable<any> {

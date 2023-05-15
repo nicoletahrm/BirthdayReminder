@@ -1,0 +1,22 @@
+<div style="background: #ececec">
+  <nz-card
+    style="width: 300px"
+    [nzBordered]="true"
+    [nzTitle]="friend?.first_name + ' ' + friend?.last_name"
+  >
+    <div class="card-detail">
+      <div style="margin-right: 10px">City:</div>
+      <div>{{ friend?.city }}</div>
+    </div>
+
+    <div class="card-detail">
+      <div style="margin-right: 10px">Phone number:</div>
+      <div>{{ friend?.phone_number }}</div>
+    </div>
+
+    <div class="card-detail">
+      <div style="margin-right: 10px">Birthday date:</div>
+      <div>{{ friend?.birthday_date }}</div>
+    </div>
+  </nz-card>
+</div>
