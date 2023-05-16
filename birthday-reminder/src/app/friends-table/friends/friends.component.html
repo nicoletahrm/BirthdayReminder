@@ -3,7 +3,7 @@
     nz-button
     nzType="primary"
     nzDanger
-    [routerLink]="'/login'"
+    [routerLink]="'/auth/login'"
     (click)="logout()"
   >
     Log out
@@ -47,7 +47,7 @@
         *ngFor="let friend of filteredFriends"
         [routerLink]="['/friends/friend-details', friend.id]"
       >
-        <td nzLeft [(ngModel)]="friend.first_name">{{ friend.first_name }}</td>
+        <td nzLeft>{{ friend.first_name }}</td>
         <td nzLeft>{{ friend.last_name }}</td>
         <td nzLeft>{{ friend.phone_number }}</td>
         <td nzLeft>{{ friend.city }}</td>
@@ -58,7 +58,7 @@
             style="margin-right: 10px"
             nz-button
             nzType="primary"
-            [routerLink]="['/friends/edit-friend']"
+            [routerLink]="['/friends/edit-friend/', friend.id]"
             [state]="friend"
           >
             Edit

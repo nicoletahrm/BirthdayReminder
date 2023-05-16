@@ -21,14 +21,12 @@ export class FriendService {
     return this.http.get<Friend[]>(`${this.baseUrl}/friends`);
   }
 
-  getFriendById(id: number): Observable<Friend | undefined> {
-    return this.getFriends().pipe(
-      map((friends: Friend[]) => friends.find((p) => p.id === id))
-    );
+  getFriendById(id: number): Observable<Friend> {
+    return this.http.get<Friend>(`${this.baseUrl}/friends/${id}`);
   }
 
-  putFriend(friend: Friend) {
-    return this.http.put(`${this.baseUrl}/friends/`, friend, this.httpOptions);
+  updateFriend(id: number, friend: Friend): Observable<any> {
+    return this.http.put(`${this.baseUrl}/friends/${id}/`, friend, this.httpOptions);
   }
 
   postFriend(friend: Friend): Observable<any> {

@@ -4,6 +4,7 @@ import { FriendsComponent } from './friends/friends.component';
 import { AddFriendComponent } from './add-friend/add-friend.component';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { FriendDetailsComponent } from './friend-details/friend-details.component';
+import { EditFriendComponent } from './edit-friend/edit-friend.component';
 
 const routes: Routes = [
   {
@@ -17,8 +18,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'edit-friend',
-    component: AddFriendComponent,
+    path: 'edit-friend/:id',
+    component: EditFriendComponent,
     canActivate: [AuthGuard],
   },
   {

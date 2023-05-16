@@ -12,9 +12,10 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { AddFriendComponent } from './add-friend/add-friend.component';
 import { FriendDetailsComponent } from './friend-details/friend-details.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { EditFriendComponent } from './edit-friend/edit-friend.component';
 
 @NgModule({
-  declarations: [FriendsComponent, AddFriendComponent, FriendDetailsComponent],
+  declarations: [FriendsComponent, AddFriendComponent, FriendDetailsComponent, EditFriendComponent],
   imports: [
     CommonModule,
     FriendsTableRoutingModule,

@@ -26,17 +26,6 @@ export class AddFriendComponent implements OnInit {
   city: string;
   birthdayDate: string;
 
-  isEdit: boolean = false;
-
-  @Input() friend: Friend = {
-    id: 0,
-    first_name: '',
-    last_name: '',
-    city: '',
-    phone_number: '',
-    birthday_date: '',
-  };
-
   constructor(
     private friendService: FriendService,
     private fb: UntypedFormBuilder,
@@ -65,8 +54,6 @@ export class AddFriendComponent implements OnInit {
         this.city = this.getCity?.value;
         this.birthdayDate = this.getBirthdayDate?.value;
       });
-
-    this.friend = history.state;
   }
 
   addFriend() {
@@ -104,24 +91,6 @@ export class AddFriendComponent implements OnInit {
         }
       },
     });
-  }
-
-  editFriend() {
-    console.log(this.isEdit);
-    this.isEdit = true;
-
-    console.log(this.isEdit);
-
-    this.newFriend = {
-      id: this.friend.id,
-      first_name: this.friend.first_name,
-      last_name: this.friend.last_name,
-      city: this.friend.city,
-      phone_number: this.friend.phone_number,
-      birthday_date: this.friend.birthday_date,
-    };
-
-    this.friendService.putFriend(this.newFriend).subscribe();
   }
 
   resetForm(e: MouseEvent): void {
