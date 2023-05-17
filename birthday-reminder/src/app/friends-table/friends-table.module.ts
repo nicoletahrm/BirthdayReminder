@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzMessageModule } from 'ng-zorro-antd/message';
@@ -28,6 +29,7 @@ import { EditFriendComponent } from './edit-friend/edit-friend.component';
     NzButtonModule,
     NzMessageModule,
     NzCardModule,
+    NzIconModule
   ],
 })
 export class FriendsTableModule {}

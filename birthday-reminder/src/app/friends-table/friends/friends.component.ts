@@ -4,6 +4,7 @@ import { FriendService } from '../services/friend.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { listOfColumns } from '../helpers/table-column-list';
 
 @Component({
   selector: 'app-friends',
@@ -13,6 +14,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class FriendsComponent implements OnInit {
   friends: Friend[];
   filteredFriends: Friend[];
+  listOfColumns = listOfColumns;
 
   _listFilter: string;
 
