@@ -1,6 +1,18 @@
-<div style="background: #ececec">
+<div
+  style="
+    background: #ececec;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  "
+>
   <nz-card
-    style="width: 300px"
+    style="
+      width: 300px;
+      height: 270px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    "
     [nzBordered]="true"
     [nzTitle]="friend?.first_name + ' ' + friend?.last_name"
   >
@@ -14,9 +26,13 @@
       <div>{{ friend?.phone_number }}</div>
     </div>
 
-    <div class="card-detail">
+    <div class="card-detail" style="margin-bottom: 30px">
       <div style="margin-right: 10px">Birthday date:</div>
       <div>{{ friend?.birthday_date }}</div>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: center">
+      <button nz-button nzType="primary" [routerLink]="'/friends'">Back</button>
     </div>
   </nz-card>
 </div>
